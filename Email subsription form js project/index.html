@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="awsome css/all.min.css" />
+    <link rel="stylesheet" href="awsome css/fontawesome.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&family=IM+Fell+English+SC&family=Inter:wght@400;500;700&family=Kaushan+Script&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@500;800&family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Email verification form</title>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="logo">
+        <img src="logo name s.png" alt="logo image" />
+        <h2 class="logo-name">Creative<span class="span-2">Heart</span></h2>
+      </div>
+      <h3>Coming Soon!</h3>
+      <h1>OurBrand New <br />Website Is Launching Soon..</h1>
+      <p>Subscribe for more details.</p>
+      <form name="submit-to-google-sheet">
+        <input type="Email" name="Email" placeholder="Your email id" required />
+        <button type="submit">Send</button>
+      </form>
+      <span id="msg"></span>
+    </div>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbxv7Gc2KtLSONcbLSdv3Ai2_pJslJNXG845J2OTMfse6D3rmF7zXeSbVYw4ghN_Hl4/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const msg = document.getElementById("msg");
+      const sent = document.querySelector(".sent");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            msg.innerHTML = "Thank You For Subscribing!";
+
+            setTimeout(function () {
+              msg.innerHTML = "";
+            }, 5000);
+            form.reset();
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
